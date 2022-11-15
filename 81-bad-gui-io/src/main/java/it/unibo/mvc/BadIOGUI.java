@@ -5,6 +5,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -15,6 +16,7 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.List;
 import java.util.Random;
 
@@ -42,9 +44,21 @@ public class BadIOGUI {
         final JPanel canvas = new JPanel();
         canvas.setLayout(new BorderLayout());
         final JButton write = new JButton("Write on file");
-        canvas.add(write, BorderLayout.CENTER);
+        //canvas.add(write, BorderLayout.CENTER);
         frame.setContentPane(canvas);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        /*
+         * Part 01
+         */
+        final JPanel newPanel = new JPanel();
+        newPanel.setLayout(new BoxLayout(newPanel, BoxLayout.LINE_AXIS));
+        canvas.add(newPanel, BorderLayout.CENTER);
+        newPanel.add(write);
+        /*
+         * Part 02
+         */
+        final JButton read = new JButton("Read");
+        newPanel.add(read);
         /*
          * Handlers
          */
@@ -66,6 +80,25 @@ public class BadIOGUI {
                 }
             }
         });
+        /*
+         * Part 03
+         */
+        read.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(final ActionEvent e) {
+                try {
+                    final List<String> lines = Files.readAllLines(Path.of(PATH));
+                    for (final String line : lines) {
+                        System.out.println(line); //NOPMD
+                        //println allowed for the exercise
+                    } 
+                } catch (IOException e1) {
+                    JOptionPane.showMessageDialog(frame, e1, "Error", JOptionPane.ERROR_MESSAGE);
+                    e1.printStackTrace(); // NOPMD: allowed as this is just an exercise
+                }
+            }
+
+        });
     }
 
     private void display() {
@@ -81,6 +114,7 @@ public class BadIOGUI {
         final int sw = (int) screen.getWidth();
         final int sh = (int) screen.getHeight();
         frame.setSize(sw / PROPORTION, sh / PROPORTION);
+        frame.pack();
         /*
          * Instead of appearing at (0,0), upper left corner of the screen, this
          * flag makes the OS window manager take care of the default positioning
