@@ -12,14 +12,16 @@ import java.io.Serializable;
 public class Controller implements Serializable {
 
     private File currentFile;
+    private String currentPath;
 
     public Controller() {
-        this.currentFile = System.getProperty("user.home") + 
+        this.currentPath = System.getProperty("user.home") + 
             System.getProperty("file.separator") + "output.txt";
     }
 
     public void setCurrentFile(final File file) {
         this.currentFile = file;
+        this.currentPath = file.getPath();
     }
 
     public File getCurrentFile() {
@@ -27,13 +29,15 @@ public class Controller implements Serializable {
     }
 
     public String getCurrentPath() {
-        return getCurrentFile().getAbsolutePath();
+        return this.currentPath;
     }
 
     public void writeOnFile(final String s) throws IOException {
         try (final BufferedWriter writer = new BufferedWriter(new FileWriter(getCurrentPath()))) {
             writer.write(s);
             writer.newLine();
+        } catch (IOException e) {
+            throw new IOException("IOException: " + e);
         }
     }
 }
