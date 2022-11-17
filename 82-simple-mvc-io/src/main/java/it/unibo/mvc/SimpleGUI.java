@@ -29,8 +29,8 @@ public final class SimpleGUI {
      */
     public SimpleGUI() {
         final JPanel panel = new JPanel(new BorderLayout());
-        frame.setContentPane(panel);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.frame.setContentPane(panel);
+        this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         final JTextArea area = new JTextArea();
         panel.add(area, BorderLayout.CENTER);
@@ -55,10 +55,10 @@ public final class SimpleGUI {
         final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
         final int screenWidth = (int) screen.getWidth();
         final int screenHeight = (int) screen.getHeight();
-        frame.setSize(screenWidth / PROPORTION, screenHeight / PROPORTION);
+        this.frame.setSize(screenWidth / PROPORTION, screenHeight / PROPORTION);
 
-        frame.setLocationByPlatform(true);
-        frame.setVisible(true);
+        this.frame.setLocationByPlatform(true);
+        this.frame.setVisible(true);
     }
 
     /**
