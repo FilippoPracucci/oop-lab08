@@ -36,7 +36,9 @@ public final class SimpleGUI {
         panel.add(area, BorderLayout.CENTER);
         final JButton save = new JButton("Save");
         panel.add(save, BorderLayout.SOUTH);
-
+        /*
+         * Handler
+         */
         save.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent e) {
