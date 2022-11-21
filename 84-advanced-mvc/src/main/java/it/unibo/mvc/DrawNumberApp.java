@@ -24,9 +24,7 @@ public final class DrawNumberApp implements DrawNumberViewObserver {
     /**
      * @param views
      *            the views to attach
-     * @throws IOException
-     * @throws FileNotFoundException
-     */
+    */
     public DrawNumberApp(final DrawNumberView... views) {
         /*
          * Side-effect proof
